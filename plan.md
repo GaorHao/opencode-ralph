@@ -312,7 +312,7 @@ opencode-ralph/
 
 ### Phase 9: Main App Component
 
-- [ ] **9.1** Create `src/app.tsx` with imports:
+- [x] **9.1** Create `src/app.tsx` with imports:
   - Import `render`, `useKeyboard` from `@opentui/solid`
   - Import `createSignal`, `onCleanup` from `solid-js`
   - Import all components (Header, Log, Footer, PausedOverlay)
