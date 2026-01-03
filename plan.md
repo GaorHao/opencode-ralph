@@ -391,7 +391,7 @@ opencode-ralph/
   - Replace `{plan}` with `options.planFile`
   - Return final prompt string
 
-- [ ] **10.5** Create `parseModel(model: string): { providerID: string; modelID: string }` function:
+- [x] **10.5** Create `parseModel(model: string): { providerID: string; modelID: string }` function:
   - Split model string by `/`
   - Return provider and model parts
   - Handle `opencode/` prefix specially if needed

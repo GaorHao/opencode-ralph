@@ -10,6 +10,19 @@ export function buildPrompt(options: LoopOptions): string {
   return template.replace(/\{plan\}/g, options.planFile);
 }
 
+export function parseModel(model: string): { providerID: string; modelID: string } {
+  const slashIndex = model.indexOf("/");
+  if (slashIndex === -1) {
+    throw new Error(
+      `Invalid model format: "${model}". Expected "provider/model" (e.g., "anthropic/claude-opus-4")`
+    );
+  }
+  return {
+    providerID: model.slice(0, slashIndex),
+    modelID: model.slice(slashIndex + 1),
+  };
+}
+
 export type LoopCallbacks = {
   onIterationStart: (iteration: number) => void;
   onEvent: (event: ToolEvent) => void;
