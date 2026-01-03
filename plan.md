@@ -396,7 +396,7 @@ opencode-ralph/
   - Return provider and model parts
   - Handle `opencode/` prefix specially if needed
 
-- [ ] **10.6** Create main `runLoop` function signature:
+- [x] **10.6** Create main `runLoop` function signature:
 
   ```typescript
   export async function runLoop(

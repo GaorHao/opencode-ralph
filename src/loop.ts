@@ -38,3 +38,12 @@ export type LoopCallbacks = {
   onComplete: () => void;
   onError: (error: string) => void;
 };
+
+export async function runLoop(
+  options: LoopOptions,
+  persistedState: PersistedState,
+  callbacks: LoopCallbacks,
+  signal: AbortSignal,
+): Promise<void> {
+  // TODO: Implement loop logic
+}
