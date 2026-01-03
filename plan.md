@@ -550,7 +550,7 @@ opencode-ralph/
   - Press `p` again, verify resume
   - Verify `.ralph-pause` file deleted
 
-- [ ] **12.5** Test completion flow:
+- [x] **12.5** Test completion flow:
   - Create small plan with 1-2 tasks
   - Run until agent creates `.ralph-done`
   - Verify clean exit with completion message

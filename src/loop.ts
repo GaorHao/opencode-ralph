@@ -180,9 +180,6 @@ export async function runLoop(
       
       callbacks.onIterationComplete(iteration, iterationDuration, commitsThisIteration);
       callbacks.onCommitsUpdated(totalCommits);
-
-      // Temporary: break to avoid infinite loop until remaining tasks are implemented
-      break;
     }
   } finally {
     // Cleanup: close server on completion, error, or abort
