@@ -522,7 +522,7 @@ opencode-ralph/
   - Call `releaseLock()` in finally block
   - Handle SIGINT/SIGTERM signals
 
-- [ ] **11.9** Add error handling wrapper:
+- [x] **11.9** Add error handling wrapper:
   - Wrap main logic in try/catch
   - On error: release lock, print error, exit(1)
 
