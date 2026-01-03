@@ -50,5 +50,12 @@ describe("time utilities", () => {
         expect(calculateEta([], 10)).toBeNull();
       });
     });
+
+    describe("single iteration", () => {
+      it("should multiply single iteration time by remaining tasks", () => {
+        // 60000ms per iteration * 5 remaining tasks = 300000ms
+        expect(calculateEta([60000], 5)).toBe(300000);
+      });
+    });
   });
 });

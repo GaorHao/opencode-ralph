@@ -95,7 +95,7 @@ Comprehensive test suite for the Ralph TUI harness using Bun's built-in test run
 - [x] **3.5** Test `calculateEta()` with empty array:
   - `calculateEta([], 10)` should return `null`
 
-- [ ] **3.6** Test `calculateEta()` with single iteration:
+- [x] **3.6** Test `calculateEta()` with single iteration:
   - `calculateEta([60000], 5)` should return `300000` (5 * 60000)
 
 - [ ] **3.7** Test `calculateEta()` with multiple iterations:
