@@ -489,7 +489,7 @@ opencode-ralph/
   - Call `acquireLock()`
   - If returns false, print error "Another ralph instance is running" and exit(1)
 
-- [ ] **11.3** Add state loading logic:
+- [x] **11.3** Add state loading logic:
   - Call `loadState()`
   - If state exists and `--reset` not passed, check plan file
 

@@ -2,6 +2,7 @@
 import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
 import { acquireLock, releaseLock } from "./lock";
+import { loadState } from "./state";
 
 const argv = await yargs(hideBin(process.argv))
   .scriptName("ralph")
@@ -41,10 +42,24 @@ if (!lockAcquired) {
   process.exit(1);
 }
 
-// TODO: Implement remaining startup logic in 11.3-11.9
+// Load existing state if present
+const existingState = await loadState();
+
+// Check if we have existing state and --reset was not passed
+let hasExistingState = false;
+let existingStateMatchesPlan = false;
+
+if (existingState && !argv.reset) {
+  hasExistingState = true;
+  existingStateMatchesPlan = existingState.planFile === argv.plan;
+}
+
+// TODO: Implement remaining startup logic in 11.4-11.9
 console.log("Ralph starting with options:", {
   plan: argv.plan,
   model: argv.model,
   prompt: argv.prompt,
   reset: argv.reset,
+  hasExistingState,
+  existingStateMatchesPlan,
 });
