@@ -117,7 +117,7 @@ opencode-ralph/
   - Function reads file with `Bun.file()`, returns `PersistedState | null`
   - Return `null` if file doesn't exist
 
-- [ ] **2.5** Add `saveState(state: PersistedState)` function to `src/state.ts`:
+- [x] **2.5** Add `saveState(state: PersistedState)` function to `src/state.ts`:
   - Write state to `STATE_FILE` using `Bun.write()` with `JSON.stringify(state, null, 2)`
 
 - [ ] **2.6** Add `LoopOptions` type to `src/state.ts`:

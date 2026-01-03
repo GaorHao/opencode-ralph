@@ -34,3 +34,7 @@ export async function loadState(): Promise<PersistedState | null> {
   }
   return await file.json();
 }
+
+export async function saveState(state: PersistedState): Promise<void> {
+  await Bun.write(STATE_FILE, JSON.stringify(state, null, 2));
+}
