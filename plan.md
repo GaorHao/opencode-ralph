@@ -224,27 +224,27 @@ opencode-ralph/
 
 ### Phase 5: TUI Components - Header
 
-- [ ] **5.1** Create `src/components/header.tsx` with basic structure:
+- [x] **5.1** Create `src/components/header.tsx` with basic structure:
   - Import `solid-js` and colors
   - Export `Header` component that takes props: `status`, `iteration`, `tasksComplete`, `totalTasks`, `eta`
   - Return a `<box>` with `flexDirection="row"` and bottom border
 
-- [ ] **5.2** Add status indicator to Header:
+- [x] **5.2** Add status indicator to Header:
   - `■` with green color for "running"
   - `⏸` with yellow color for "paused"
   - `✓` with green color for "complete"
   - `✗` with red color for "error"
   - `◌` with muted color for "starting"
 
-- [ ] **5.3** Add iteration display to Header:
+- [x] **5.3** Add iteration display to Header:
   - Text: `iteration {iteration}`
   - Separated by `│` with muted color
 
-- [ ] **5.4** Add task progress to Header:
+- [x] **5.4** Add task progress to Header:
   - Text: `{tasksComplete}/{totalTasks} tasks`
   - Separated by `│` with muted color
 
-- [ ] **5.5** Add ETA display to Header:
+- [x] **5.5** Add ETA display to Header:
   - Use `formatEta()` from time utils
   - Separated by `│` with muted color
 

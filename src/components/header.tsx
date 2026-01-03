@@ -1,0 +1,74 @@
+import { colors } from "./colors";
+import { formatEta } from "../util/time";
+
+export type HeaderProps = {
+  status: "starting" | "running" | "paused" | "complete" | "error";
+  iteration: number;
+  tasksComplete: number;
+  totalTasks: number;
+  eta: number | null;
+};
+
+/**
+ * Header component displaying status, iteration, tasks, and ETA.
+ * Uses flexDirection="row" with a bottom border.
+ */
+export function Header(props: HeaderProps) {
+  // Status indicator with appropriate icon and color
+  const getStatusDisplay = () => {
+    switch (props.status) {
+      case "running":
+        return { icon: "\u25A0", color: colors.green }; // ■
+      case "paused":
+        return { icon: "\u23F8", color: colors.yellow }; // ⏸
+      case "complete":
+        return { icon: "\u2713", color: colors.green }; // ✓
+      case "error":
+        return { icon: "\u2717", color: colors.red }; // ✗
+      case "starting":
+      default:
+        return { icon: "\u25CC", color: colors.fgMuted }; // ◌
+    }
+  };
+
+  const statusDisplay = getStatusDisplay();
+
+  return (
+    <box
+      flexDirection="row"
+      width="100%"
+      height={1}
+      alignItems="center"
+      paddingLeft={1}
+      paddingRight={1}
+      borderStyle="single"
+      border={["bottom"]}
+      borderColor={colors.border}
+      backgroundColor={colors.bg}
+    >
+      {/* Status indicator */}
+      <text fg={statusDisplay.color}>{statusDisplay.icon}</text>
+      <text fg={colors.fg}> {props.status}</text>
+
+      {/* Separator */}
+      <text fg={colors.fgMuted}> \u2502 </text>
+
+      {/* Iteration display */}
+      <text fg={colors.fg}>iteration {props.iteration}</text>
+
+      {/* Separator */}
+      <text fg={colors.fgMuted}> \u2502 </text>
+
+      {/* Task progress */}
+      <text fg={colors.fg}>
+        {props.tasksComplete}/{props.totalTasks} tasks
+      </text>
+
+      {/* Separator */}
+      <text fg={colors.fgMuted}> \u2502 </text>
+
+      {/* ETA display */}
+      <text fg={colors.fgMuted}>{formatEta(props.eta)}</text>
+    </box>
+  );
+}
