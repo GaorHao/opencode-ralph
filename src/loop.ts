@@ -91,7 +91,9 @@ export async function runLoop(
         timestamp: iterationStartTime,
       });
 
-      // TODO: Implement plan parsing in loop (10.12)
+      // Parse plan and update task counts (10.12)
+      const { done, total } = await parsePlan(options.planFile);
+      callbacks.onTasksUpdated(done, total);
       // TODO: Implement session creation (10.13)
       // TODO: Implement prompt sending (10.14)
       // TODO: Implement event streaming (10.15)

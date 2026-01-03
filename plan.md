@@ -433,7 +433,7 @@ opencode-ralph/
   - Call `callbacks.onIterationStart(iteration)`
   - Add separator event for new iteration
 
-- [ ] **10.12** Implement plan parsing in loop:
+- [x] **10.12** Implement plan parsing in loop:
   - Call `parsePlan(options.planFile)`
   - Call `callbacks.onTasksUpdated(done, total)`
 
