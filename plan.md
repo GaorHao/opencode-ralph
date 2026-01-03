@@ -288,7 +288,7 @@ opencode-ralph/
   - Show "running" instead of duration if iteration in progress
   - Use muted color for lines, normal for text
 
-- [ ] **7.5** Add tool event rendering in Log:
+- [x] **7.5** Add tool event rendering in Log:
   - When `event.type === "tool"`
   - Format: `{icon} {text}`
   - Use icon from `TOOL_ICONS` or default to `⚙`
