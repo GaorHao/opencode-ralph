@@ -183,7 +183,7 @@ opencode-ralph/
 
 ### Phase 4: TUI Components - Colors and Constants
 
-- [ ] **4.1** Create `src/components/colors.ts` with Tokyo Night color palette:
+- [x] **4.1** Create `src/components/colors.ts` with Tokyo Night color palette:
 
   ```typescript
   export const colors = {
@@ -204,7 +204,7 @@ opencode-ralph/
   };
   ```
 
-- [ ] **4.2** Add `TOOL_ICONS` constant to `src/components/colors.ts`:
+- [x] **4.2** Add `TOOL_ICONS` constant to `src/components/colors.ts`:
   ```typescript
   export const TOOL_ICONS: Record<string, string> = {
     read: "→",
