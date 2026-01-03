@@ -485,7 +485,7 @@ opencode-ralph/
   - Define options: `--plan`, `--model`, `--prompt`, `--reset`
   - Set defaults: plan="plan.md", model="opencode/claude-opus-4-5"
 
-- [ ] **11.2** Add lock acquisition at startup:
+- [x] **11.2** Add lock acquisition at startup:
   - Call `acquireLock()`
   - If returns false, print error "Another ralph instance is running" and exit(1)
 

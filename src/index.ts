@@ -1,6 +1,7 @@
 #!/usr/bin/env bun
 import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
+import { acquireLock, releaseLock } from "./lock";
 
 const argv = await yargs(hideBin(process.argv))
   .scriptName("ralph")
@@ -33,7 +34,14 @@ const argv = await yargs(hideBin(process.argv))
   .strict()
   .parse();
 
-// TODO: Implement remaining startup logic in 11.2-11.9
+// Acquire lock to prevent multiple instances
+const lockAcquired = await acquireLock();
+if (!lockAcquired) {
+  console.error("Another ralph instance is running");
+  process.exit(1);
+}
+
+// TODO: Implement remaining startup logic in 11.3-11.9
 console.log("Ralph starting with options:", {
   plan: argv.plan,
   model: argv.model,
