@@ -36,8 +36,8 @@ Fix TUI freezing caused by memory leak and excessive CPU usage.
 
 - [x] Create `batchStateUpdate` helper function in `src/index.ts` to coalesce rapid state changes
 - [x] Debounce `onEvent` callback to batch events arriving within 50ms window
-- [ ] Debounce `onDiffUpdated` and `onCommitsUpdated` callbacks (these can lag slightly)
-- [ ] Ensure `onIterationStart` and `onIterationComplete` remain unbatched (user needs immediate feedback)
+- [x] Debounce `onDiffUpdated` and `onCommitsUpdated` callbacks (these can lag slightly)
+- [x] Ensure `onIterationStart` and `onIterationComplete` remain unbatched (user needs immediate feedback)
 
 ## Phase 5: Idle Mode Optimization
 

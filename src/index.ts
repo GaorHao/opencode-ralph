@@ -254,16 +254,14 @@ async function main() {
         }));
       },
       onCommitsUpdated: (commits) => {
-        // Update state.commits
-        stateSetters.setState((prev) => ({
-          ...prev,
+        // Debounce commits updates - these can lag slightly for better batching
+        batchedUpdater.queueUpdate(() => ({
           commits,
         }));
       },
       onDiffUpdated: (added, removed) => {
-        // Update state.linesAdded and state.linesRemoved
-        stateSetters.setState((prev) => ({
-          ...prev,
+        // Debounce diff updates - these can lag slightly for better batching
+        batchedUpdater.queueUpdate(() => ({
           linesAdded: added,
           linesRemoved: removed,
         }));
