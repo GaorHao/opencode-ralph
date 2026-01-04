@@ -259,7 +259,7 @@ Comprehensive test suite for the Ralph TUI harness using Bun's built-in test run
   - Remove `.ralph-lock`, `.ralph-pause`, `.ralph-done`, `.ralph-state.json`
   - Reset any global state
 
-- [ ] **9.4** Remove legacy ad-hoc test files:
+- [x] **9.4** Remove legacy ad-hoc test files:
   - Delete `test-parse-plan.ts`
   - Delete `test-state-persistence.ts`
   - Delete `test-pause-functionality.ts`
