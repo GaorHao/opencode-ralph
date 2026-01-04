@@ -49,5 +49,21 @@ describe("git utilities", () => {
       // There should be exactly 5 commits since HEAD~5
       expect(count).toBe(5);
     });
+
+    it("should return 0 for invalid hash", async () => {
+      // Pass a completely invalid hash that doesn't exist in the repo
+      const count = await getCommitsSince("invalidhash123456789");
+
+      // Should gracefully handle the error and return 0
+      expect(count).toBe(0);
+    });
+
+    it("should return 0 for malformed hash", async () => {
+      // Pass a malformed hash (not proper hex format)
+      const count = await getCommitsSince("not-a-valid-git-hash!");
+
+      // Should gracefully handle the error and return 0
+      expect(count).toBe(0);
+    });
   });
 });

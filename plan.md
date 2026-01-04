@@ -175,7 +175,7 @@ Comprehensive test suite for the Ralph TUI harness using Bun's built-in test run
   - Get HEAD~5 hash
   - `getCommitsSince(headMinus5)` should return `5`
 
-- [ ] **6.4** Test `getCommitsSince()` with invalid hash:
+- [x] **6.4** Test `getCommitsSince()` with invalid hash:
   - Should return `0` or handle gracefully
 
 ---
