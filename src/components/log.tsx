@@ -79,15 +79,19 @@ function Spinner() {
 /**
  * Renders an iteration separator line.
  * Format: ── iteration {n} ──────────── {duration} · {commits} commit(s) ──
+ * 
+ * Memoized to prevent re-computation of duration and commit text on every reactive update.
  */
 function SeparatorEvent(props: { event: ToolEvent }) {
-  const durationText = () =>
+  const durationText = createMemo(() =>
     props.event.duration !== undefined
       ? formatDuration(props.event.duration)
-      : "running";
-  const commitCount = () => props.event.commitCount ?? 0;
-  const commitText = () =>
-    `${commitCount()} commit${commitCount() !== 1 ? "s" : ""}`;
+      : "running"
+  );
+  const commitCount = createMemo(() => props.event.commitCount ?? 0);
+  const commitText = createMemo(() =>
+    `${commitCount()} commit${commitCount() !== 1 ? "s" : ""}`
+  );
 
   return (
     <box width="100%" paddingTop={1} paddingBottom={1} flexDirection="row">
