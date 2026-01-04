@@ -39,6 +39,7 @@ export type LoopCallbacks = {
   onResume: () => void;
   onComplete: () => void;
   onError: (error: string) => void;
+  onIdleChanged: (isIdle: boolean) => void;
 };
 
 export async function runLoop(
@@ -145,12 +146,16 @@ export async function runLoop(
         },
       });
       log("loop", "Prompt sent (async)");
+      
+      // Set idle state while waiting for LLM response
+      callbacks.onIdleChanged(true);
 
       // Subscribe to events and iterate over the stream (10.15)
       log("loop", "Subscribing to events...");
       const events = await client.event.subscribe();
       log("loop", "Event subscription established, processing events...");
       
+      let receivedFirstEvent = false;
       for await (const event of events.stream) {
         if (signal.aborted) {
           log("loop", "Signal aborted during event processing");
@@ -164,6 +169,12 @@ export async function runLoop(
 
           // Tool event mapping (10.16)
           if (part.type === "tool" && part.state.status === "completed") {
+            // Set isIdle to false when first tool event arrives
+            if (!receivedFirstEvent) {
+              receivedFirstEvent = true;
+              callbacks.onIdleChanged(false);
+            }
+            
             const toolName = part.tool;
             const title =
               part.state.title ||

@@ -135,6 +135,9 @@ describe("ralph flow integration", () => {
     onError: (error) => {
       callbackOrder.push(`onError:${error}`);
     },
+    onIdleChanged: (isIdle) => {
+      callbackOrder.push(`onIdleChanged:${isIdle}`);
+    },
   });
 
   beforeEach(() => {
@@ -549,6 +552,9 @@ describe("ralph flow integration", () => {
       },
       onError: (error) => {
         callbackOrder.push(`onError:${error}`);
+      },
+      onIdleChanged: (isIdle) => {
+        callbackOrder.push(`onIdleChanged:${isIdle}`);
       },
     };
 

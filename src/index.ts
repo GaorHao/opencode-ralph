@@ -295,6 +295,13 @@ async function main() {
           error,
         }));
       },
+      onIdleChanged: (isIdle) => {
+        // Update isIdle state for idle mode optimization
+        stateSetters.setState((prev) => ({
+          ...prev,
+          isIdle,
+        }));
+      },
     }, abortController.signal).catch((error) => {
       log("main", "Loop error", { error: error instanceof Error ? error.message : String(error) });
       console.error("Loop error:", error);
