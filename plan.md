@@ -114,11 +114,11 @@ Comprehensive test suite for the Ralph TUI harness using Bun's built-in test run
 
 ## Phase 4: Unit Tests - State Management (`src/state.ts`)
 
-- [ ] **4.1** Test `loadState()` when file doesn't exist:
+- [x] **4.1** Test `loadState()` when file doesn't exist:
   - Should return `null`
   - Should not throw
 
-- [ ] **4.2** Test `loadState()` with valid state file:
+- [x] **4.2** Test `loadState()` with valid state file:
   - Create state file with valid JSON
   - Should return parsed `PersistedState`
 
