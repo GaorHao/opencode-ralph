@@ -164,7 +164,7 @@ Comprehensive test suite for the Ralph TUI harness using Bun's built-in test run
 
 ## Phase 6: Unit Tests - Git Utilities (`src/git.ts`)
 
-- [ ] **6.1** Test `getHeadHash()` returns valid hash:
+- [x] **6.1** Test `getHeadHash()` returns valid hash:
   - Should return 40-character hex string
   - Should match `git rev-parse HEAD` output
 
