@@ -52,4 +52,39 @@ describe("state management", () => {
       expect(result!.planFile).toBe("plan.md");
     });
   });
+
+  describe("saveState()", () => {
+    it("should create valid JSON with all required fields", async () => {
+      const state: PersistedState = {
+        startTime: 1704067200000,
+        initialCommitHash: "abc123def456789012345678901234567890abcd",
+        iterationTimes: [60000, 120000],
+        planFile: "plan.md",
+      };
+
+      await saveState(state);
+
+      // Read the file as text to verify it's valid JSON
+      const file = Bun.file(STATE_FILE);
+      const exists = await file.exists();
+      expect(exists).toBe(true);
+
+      const content = await file.text();
+
+      // Should be valid JSON (won't throw)
+      const parsed = JSON.parse(content);
+
+      // Verify all required fields are present
+      expect(parsed).toHaveProperty("startTime");
+      expect(parsed).toHaveProperty("initialCommitHash");
+      expect(parsed).toHaveProperty("iterationTimes");
+      expect(parsed).toHaveProperty("planFile");
+
+      // Verify values are correct
+      expect(parsed.startTime).toBe(1704067200000);
+      expect(parsed.initialCommitHash).toBe("abc123def456789012345678901234567890abcd");
+      expect(parsed.iterationTimes).toEqual([60000, 120000]);
+      expect(parsed.planFile).toBe("plan.md");
+    });
+  });
 });

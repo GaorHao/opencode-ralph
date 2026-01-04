@@ -122,7 +122,7 @@ Comprehensive test suite for the Ralph TUI harness using Bun's built-in test run
   - Create state file with valid JSON
   - Should return parsed `PersistedState`
 
-- [ ] **4.3** Test `saveState()` creates valid JSON:
+- [x] **4.3** Test `saveState()` creates valid JSON:
   - Save state, read file, verify valid JSON structure
   - Verify all fields present: `startTime`, `initialCommitHash`, `iterationTimes`, `planFile`
 
