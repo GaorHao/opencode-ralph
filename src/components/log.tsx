@@ -1,4 +1,4 @@
-import { For, Index, Show, createSignal, onCleanup, onMount } from "solid-js";
+import { For, Index, Show, createMemo, createSignal, onCleanup, onMount } from "solid-js";
 import { colors, TOOL_ICONS } from "./colors";
 import { formatDuration } from "../util/time";
 import type { ToolEvent } from "../state";
@@ -106,10 +106,12 @@ function SeparatorEvent(props: { event: ToolEvent }) {
  * Renders a tool event line.
  * Format: {icon} {text}
  * Icon color is based on tool type (blue for read, green for write/edit, etc.)
+ * 
+ * Memoized to prevent re-computation of icon and color on every reactive update.
  */
 function ToolEventItem(props: { event: ToolEvent }) {
-  const icon = () => props.event.icon || DEFAULT_ICON;
-  const iconColor = () => getToolColor(props.event.icon);
+  const icon = createMemo(() => props.event.icon || DEFAULT_ICON);
+  const iconColor = createMemo(() => getToolColor(props.event.icon));
 
   return (
     <box width="100%" flexDirection="row">
