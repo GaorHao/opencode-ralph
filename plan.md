@@ -130,7 +130,7 @@ Comprehensive test suite for the Ralph TUI harness using Bun's built-in test run
   - Save state twice with different values
   - Verify second state is what's persisted
 
-- [ ] **4.5** Test state roundtrip:
+- [x] **4.5** Test state roundtrip:
   - Create state, save it, load it
   - Verify loaded state matches original
 

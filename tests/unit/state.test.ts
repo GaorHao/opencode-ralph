@@ -124,4 +124,71 @@ describe("state management", () => {
       expect(loaded!.planFile).not.toBe(firstState.planFile);
     });
   });
+
+  describe("state roundtrip", () => {
+    it("should preserve all state fields through save/load cycle", async () => {
+      const originalState: PersistedState = {
+        startTime: 1704067200000,
+        initialCommitHash: "abc123def456789012345678901234567890abcd",
+        iterationTimes: [60000, 120000, 90000],
+        planFile: "plan.md",
+      };
+
+      // Save the state
+      await saveState(originalState);
+
+      // Load it back
+      const loadedState = await loadState();
+
+      // Verify loaded state matches original exactly
+      expect(loadedState).not.toBeNull();
+      expect(loadedState).toEqual(originalState);
+    });
+
+    it("should preserve empty iterationTimes array through roundtrip", async () => {
+      const originalState: PersistedState = {
+        startTime: 1704067200000,
+        initialCommitHash: "abc123def456789012345678901234567890abcd",
+        iterationTimes: [],
+        planFile: "plan.md",
+      };
+
+      await saveState(originalState);
+      const loadedState = await loadState();
+
+      expect(loadedState).toEqual(originalState);
+      expect(loadedState!.iterationTimes).toEqual([]);
+    });
+
+    it("should preserve large iterationTimes array through roundtrip", async () => {
+      const largeIterationTimes = Array.from({ length: 100 }, (_, i) => (i + 1) * 10000);
+      const originalState: PersistedState = {
+        startTime: 1704067200000,
+        initialCommitHash: "abc123def456789012345678901234567890abcd",
+        iterationTimes: largeIterationTimes,
+        planFile: "plan.md",
+      };
+
+      await saveState(originalState);
+      const loadedState = await loadState();
+
+      expect(loadedState).toEqual(originalState);
+      expect(loadedState!.iterationTimes).toHaveLength(100);
+    });
+
+    it("should preserve special characters in planFile through roundtrip", async () => {
+      const originalState: PersistedState = {
+        startTime: 1704067200000,
+        initialCommitHash: "abc123def456789012345678901234567890abcd",
+        iterationTimes: [60000],
+        planFile: "plans/feature-plan (v2).md",
+      };
+
+      await saveState(originalState);
+      const loadedState = await loadState();
+
+      expect(loadedState).toEqual(originalState);
+      expect(loadedState!.planFile).toBe("plans/feature-plan (v2).md");
+    });
+  });
 });
