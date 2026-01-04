@@ -2,6 +2,8 @@
 
 AI agent loop for autonomous task execution. Reads a plan, picks one task, completes it, commits, repeats.
 
+<img width="1714" height="1076" alt="image" src="https://github.com/user-attachments/assets/3dd85500-0164-44cd-8917-dfcbe787c09f" />
+
 ## Quick Start
 
 ```bash
