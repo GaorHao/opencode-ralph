@@ -1,3 +1,4 @@
+import { createMemo } from "solid-js";
 import { colors } from "./colors";
 import { formatEta } from "../util/time";
 
@@ -33,6 +34,15 @@ export function Header(props: HeaderProps) {
 
   const statusDisplay = getStatusDisplay();
 
+  // Memoize progress bar strings - only recompute when tasksComplete or totalTasks change
+  const filledCount = createMemo(() =>
+    props.totalTasks > 0
+      ? Math.round((props.tasksComplete / props.totalTasks) * 10)
+      : 0
+  );
+  const filledBar = createMemo(() => "\u25A0".repeat(filledCount()));
+  const emptyBar = createMemo(() => "\u25A1".repeat(10 - filledCount()));
+
   return (
     <box
       flexDirection="row"
@@ -63,21 +73,8 @@ export function Header(props: HeaderProps) {
       <text fg={colors.fg}>
         {props.tasksComplete}/{props.totalTasks} tasks{" "}
         <span style={{ fg: colors.fgMuted }}>[</span>
-        <span style={{ fg: colors.green }}>
-          {"\u25A0".repeat(
-            props.totalTasks > 0
-              ? Math.round((props.tasksComplete / props.totalTasks) * 10)
-              : 0
-          )}
-        </span>
-        <span style={{ fg: colors.fgMuted }}>
-          {"\u25A1".repeat(
-            10 -
-              (props.totalTasks > 0
-                ? Math.round((props.tasksComplete / props.totalTasks) * 10)
-                : 0)
-          )}
-        </span>
+        <span style={{ fg: colors.green }}>{filledBar()}</span>
+        <span style={{ fg: colors.fgMuted }}>{emptyBar()}</span>
         <span style={{ fg: colors.fgMuted }}>]</span>
       </text>
 

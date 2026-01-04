@@ -72,9 +72,9 @@ Every render:
 
 ### Phase 4: Fix Header String Allocations
 
-- [ ] Memoize progress bar filled string with `createMemo`
-- [ ] Memoize progress bar empty string with `createMemo`
-- [ ] Only recompute when `tasksComplete` or `totalTasks` actually change
+- [x] Memoize progress bar filled string with `createMemo`
+- [x] Memoize progress bar empty string with `createMemo`
+- [x] Only recompute when `tasksComplete` or `totalTasks` actually change
 
 ### Phase 5: Fix Elapsed Timer
 
