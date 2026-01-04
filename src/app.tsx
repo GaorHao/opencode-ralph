@@ -152,10 +152,10 @@ export function App(props: AppProps) {
     Date.now() - props.persistedState.startTime
   );
 
-  // Update elapsed time periodically
+  // Update elapsed time periodically (2000ms to reduce render frequency)
   const elapsedInterval = setInterval(() => {
     setElapsed(Date.now() - props.persistedState.startTime);
-  }, 1000);
+  }, 2000);
 
   onCleanup(() => {
     clearInterval(elapsedInterval);
