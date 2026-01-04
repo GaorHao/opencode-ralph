@@ -1,4 +1,4 @@
-import { For, Show, createMemo, createSignal, onCleanup, onMount } from "solid-js";
+import { For, Show, createEffect, createMemo, createSignal, onCleanup, onMount } from "solid-js";
 import { colors, TOOL_ICONS } from "./colors";
 import { formatDuration } from "../util/time";
 import type { ToolEvent } from "../state";
@@ -89,7 +89,7 @@ function Spinner(props: { isIdle: boolean }) {
   });
 
   // React to isIdle changes
-  createMemo(() => {
+  createEffect(() => {
     if (props.isIdle) {
       stopAnimation();
     } else {

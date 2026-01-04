@@ -60,7 +60,7 @@ Every render:
 
 ### Phase 2: Fix Spinner Animation
 
-- [ ] Change `createMemo` to `createEffect` in `Spinner` component for start/stop logic
+- [x] Change `createMemo` to `createEffect` in `Spinner` component for start/stop logic
 - [ ] Ensure interval is only created once, not on every reactive update
 
 ### Phase 3: Fix Event Array Mutations (index.ts)
