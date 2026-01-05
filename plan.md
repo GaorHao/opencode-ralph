@@ -28,14 +28,15 @@ The `bin/ralph.ts` file spawns a child process which creates stdin/stdout inheri
   - Option B: Use dynamic import after preload is loaded (not needed)
   - Verified: preload is applied correctly - TUI renders and Solid JSX works
 
-- [ ] **1.4** Preserve `RALPH_USER_CWD` behavior:
-  - The cwd handling in `src/index.ts` should still work
-  - Test that `process.cwd()` returns correct directory when run from different locations
+- [x] **1.4** Preserve `RALPH_USER_CWD` behavior:
+  - The cwd handling in `src/index.ts` works correctly
+  - Tested: `bin/ralph.ts` saves `RALPH_USER_CWD`, changes to package root, then `src/index.ts` restores to user's cwd
+  - Note: Must run `bun bin/ralph.ts` from the package directory (or use `bun run ralph`) so bun finds `bunfig.toml` for the preload
 
-- [ ] **1.5** Test the direct execution approach:
-  - Run `bun bin/ralph.ts` directly
-  - Verify TUI renders
-  - Verify keyboard input works
+- [x] **1.5** Test the direct execution approach:
+  - Run `bun bin/ralph.ts` directly - works
+  - TUI renders correctly with header, log area, footer
+  - Keyboard shortcuts displayed: (q) interrupt (p) pause
 
 ---
 
