@@ -116,6 +116,17 @@ function createBatchStateUpdater(
 }
 
 async function main() {
+  // Add global error handlers early to catch any issues
+  process.on("uncaughtException", (err) => {
+    log("main", "UNCAUGHT EXCEPTION", { error: err.message, stack: err.stack });
+    console.error("Uncaught:", err);
+  });
+
+  process.on("unhandledRejection", (reason) => {
+    log("main", "UNHANDLED REJECTION", { reason: String(reason) });
+    console.error("Unhandled rejection:", reason);
+  });
+
   const argv = await yargs(hideBin(process.argv))
     .scriptName("ralph")
     .usage("$0 [options]")
@@ -223,20 +234,31 @@ async function main() {
     // Create abort controller for cancellation
     const abortController = new AbortController();
 
+    // Keep event loop alive on Windows - stdin.resume() doesn't keep Bun's event loop active
+    // This interval ensures the process stays alive until explicitly exited
+    const keepaliveInterval = setInterval(() => {}, 60000);
+
     // Cleanup function for graceful shutdown
     async function cleanup() {
+      log("main", "cleanup() called");
+      clearInterval(keepaliveInterval);
       abortController.abort();
       await releaseLock();
+      log("main", "cleanup() done");
     }
 
     // Handle SIGINT (Ctrl+C) and SIGTERM signals for graceful shutdown
     process.on("SIGINT", async () => {
+      log("main", "SIGINT received");
       await cleanup();
+      log("main", "SIGINT cleanup done, exiting");
       process.exit(0);
     });
 
     process.on("SIGTERM", async () => {
+      log("main", "SIGTERM received");
       await cleanup();
+      log("main", "SIGTERM cleanup done, exiting");
       process.exit(0);
     });
 
@@ -396,6 +418,7 @@ async function main() {
     await exitPromise;
     log("main", "Exit received, cleaning up");
   } finally {
+    log("main", "FINALLY BLOCK ENTERED");
     await releaseLock();
     log("main", "Lock released, exiting process");
     process.exit(0);
