@@ -143,17 +143,13 @@ export function App(props: AppProps) {
     props.iterationTimesRef || [...props.persistedState.iterationTimes]
   );
 
-  // Export the state setter to module scope for external access
+  // Export the state setter to module scope for external access.
+  // We wrap setState to call requestRender() after updates - this helps ensure
+  // the TUI refreshes on Windows where automatic redraw can sometimes stall.
+  // Note: OpenCode only uses requestRender() sparingly for specific edge cases,
+  // but we keep it here as a defensive measure for cross-platform reliability.
   globalSetState = (update) => {
     const result = setState(update);
-    const s = state();
-    log("app", "globalSetState", {
-      status: s.status,
-      iteration: s.iteration,
-      tasksComplete: s.tasksComplete,
-      totalTasks: s.totalTasks,
-    });
-    // Force renderer to refresh in case automatic redraw stalls on Windows
     renderer.requestRender?.();
     return result;
   };

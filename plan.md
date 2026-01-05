@@ -82,10 +82,16 @@ The `onMount` hook in Solid components isn't firing reliably, which breaks keybo
   - Added clear documentation explaining that state setters are set in component body (not onMount)
   - Follows OpenCode pattern: trust Solid's reactive system, no mount timing dependencies
 
-- [ ] **2.4** Simplify the `globalSetState` pattern:
+- [x] **2.4** Simplify the `globalSetState` pattern:
   - Currently wraps setState with logging and requestRender
   - Consider if this wrapper is necessary
   - Keep the `renderer.requestRender?.()` call as it may help
+  
+  **Completed (2025-01-05):**
+  - Removed verbose debug logging from globalSetState wrapper
+  - Kept `renderer.requestRender?.()` call for Windows compatibility
+  - Added clear documentation comment explaining why the wrapper exists
+  - Follows OpenCode's approach: requestRender only for specific edge cases, but kept defensively for cross-platform reliability
 
 - [ ] **2.5** Test that state updates trigger re-renders:
   - Add logging to verify setState is being called
