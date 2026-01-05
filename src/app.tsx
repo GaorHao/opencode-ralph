@@ -111,6 +111,10 @@ let rendererInfoLogged = false;
 export function App(props: AppProps) {
   // Get renderer for cleanup on quit
   const renderer = useRenderer();
+  
+  // Task 3.4: Disable stdout interception to prevent OpenTUI from capturing stdout
+  // which may interfere with logging and other output. OpenCode does this at line 170.
+  renderer.disableStdoutInterception();
 
   if (!rendererInfoLogged) {
     rendererInfoLogged = true;

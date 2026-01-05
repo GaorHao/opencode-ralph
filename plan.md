@@ -155,10 +155,15 @@ The `useKeyboard` hook relies on `onMount` which may not be firing.
   - This enables the Kitty keyboard protocol for improved key event handling
   - TypeScript compiles successfully
 
-- [ ] **3.4** Add `renderer.disableStdoutInterception()` call:
+- [x] **3.4** Add `renderer.disableStdoutInterception()` call:
   - OpenCode calls this right after getting the renderer
   - Add in `App` component: `renderer.disableStdoutInterception()`
   - This prevents OpenTUI from capturing stdout which may interfere
+  
+  **Completed (2025-01-05):**
+  - Added `renderer.disableStdoutInterception()` call immediately after `useRenderer()` in the App component
+  - Matches OpenCode's pattern at line 169-170 of their app.tsx
+  - TypeScript compiles successfully
 
 - [ ] **3.5** Fix keyboard event property access:
   - Current code uses `(e as any).key ?? (e as any).name ?? (e as any).sequence`
