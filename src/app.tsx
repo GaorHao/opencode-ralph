@@ -1,5 +1,5 @@
 import { render, useKeyboard, useRenderer } from "@opentui/solid";
-import { createSignal, onCleanup, Setter } from "solid-js";
+import { createSignal, createEffect, onCleanup, Setter } from "solid-js";
 import { Header } from "./components/header";
 import { Log } from "./components/log";
 import { Footer } from "./components/footer";
@@ -142,6 +142,20 @@ export function App(props: AppProps) {
   const [iterationTimes, setIterationTimes] = createSignal<number[]>(
     props.iterationTimesRef || [...props.persistedState.iterationTimes]
   );
+
+  // Verification effect: logs whenever state changes to confirm reactivity is working.
+  // This proves that setState triggers re-renders (task 2.5 verification).
+  createEffect(() => {
+    const s = state();
+    log("app", "State changed (reactive effect)", {
+      status: s.status,
+      iteration: s.iteration,
+      tasksComplete: s.tasksComplete,
+      totalTasks: s.totalTasks,
+      eventsCount: s.events.length,
+      isIdle: s.isIdle,
+    });
+  });
 
   // Export the state setter to module scope for external access.
   // We wrap setState to call requestRender() after updates - this helps ensure

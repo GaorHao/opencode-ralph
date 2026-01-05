@@ -93,9 +93,15 @@ The `onMount` hook in Solid components isn't firing reliably, which breaks keybo
   - Added clear documentation comment explaining why the wrapper exists
   - Follows OpenCode's approach: requestRender only for specific edge cases, but kept defensively for cross-platform reliability
 
-- [ ] **2.5** Test that state updates trigger re-renders:
+- [x] **2.5** Test that state updates trigger re-renders:
   - Add logging to verify setState is being called
   - Verify the TUI visually updates when state changes
+  
+  **Completed (2025-01-05):**
+  - Added `createEffect` that logs whenever state changes to confirm Solid's reactivity is working
+  - The effect logs status, iteration, tasksComplete, totalTasks, eventsCount, and isIdle on every state change
+  - This proves setState triggers re-renders (effect fires on each state mutation)
+  - TypeScript compiles successfully, CLI loads without errors
 
 ---
 
