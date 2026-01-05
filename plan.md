@@ -183,10 +183,19 @@ The `useKeyboard` hook relies on `onMount` which may not be firing.
 
 The fallback stdin handler in `src/index.ts` may conflict with OpenTUI's keyboard handling.
 
-- [ ] **4.1** Understand the conflict:
+- [x] **4.1** Understand the conflict:
   - OpenTUI sets stdin to raw mode for keyboard handling
   - Ralph's `process.stdin.on("data")` handler may interfere
   - Document which handler should take precedence
+  
+  **Findings (2025-01-05):**
+  1. **OpenCode does NOT use fallback stdin handlers** - OpenCode only uses `process.stdin.on("data")` temporarily for querying terminal background color via OSC escape sequences, NOT for keyboard input. All keyboard handling goes through `useKeyboard` exclusively.
+  2. **OpenTUI sets up stdin in raw mode** - In `setupInput()`, OpenTUI calls `stdin.setRawMode(true)`, registers its own `stdin.on("data")` handler, and uses `StdinBuffer` to properly parse escape sequences.
+  3. **Multiple listeners cause conflict** - Node.js allows multiple `stdin.on("data")` listeners. Both Ralph's handler AND OpenTUI's handler receive the same data, leading to:
+     - Double processing: "q" triggers both `requestQuit()` and `useKeyboard` callback
+     - Potential interference with escape sequence detection in OpenTUI's `StdinBuffer`
+     - Redundancy since `useKeyboard` in `src/app.tsx` already handles "q" and Ctrl+C
+  4. **Recommendation: Remove Ralph's stdin handler** - OpenTUI expects exclusive control over stdin. The `useKeyboard` hook provides the proper quit functionality through OpenTUI's official API.
 
 - [ ] **4.2** Remove the fallback stdin handler:
   - Delete the `process.stdin.on("data")` block in `src/index.ts`
