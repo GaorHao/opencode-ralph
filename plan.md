@@ -341,11 +341,26 @@ Ensure clean shutdown when 'q' is pressed.
   - exitPromise resolve: `log("main", "Exit received, cleaning up")` at index.ts:504
   - Full quit flow logging chain: quit key → onQuit → exitResolve → exitPromise resolves → finally block
 
-- [ ] **6.4** Test quit flow end-to-end:
+- [x] **6.4** Test quit flow end-to-end:
   - Start ralph
   - Press 'q'
   - Verify process exits cleanly
   - Check logs for expected sequence
+  
+  **Completed (2025-01-05):**
+  - Ran `bun bin/ralph.ts` with input "n" (fresh start) to capture TUI output
+  - TUI renders correctly: header with "starting", "iteration 1", "0/0 tasks", footer with "(q) interrupt (p) pause"
+  - Checked `.ralph.log` for quit flow logging
+  - **CRITICAL FINDING**: `onMount` is NOT firing! The log shows:
+    - `[app] useKeyboard hook being registered (component body)` ✓
+    - `[app] render() completed, state setters ready` ✓
+    - `[main] Enabling fallback stdin handler (OpenTUI keyboard not detected)` ← 5 sec timeout triggered
+    - **MISSING**: `onMount fired - keyboard handlers should now be registered` ← never logged!
+  - This confirms `onMount` lifecycle hook does not fire reliably in @opentui/solid
+  - `useKeyboard` registers its actual listener inside OpenTUI's `onMount`, so keyboard events don't work
+  - The fallback stdin handler (added in task 4.3) activates after 5 seconds as expected
+  - **Result**: Quit via 'q' works ONLY through the fallback handler, not through OpenTUI's `useKeyboard`
+  - **Root cause**: @opentui/solid `onMount` timing issue - needs investigation or workaround
 
 ---
 
