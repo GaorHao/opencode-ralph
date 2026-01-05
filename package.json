@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "type": "module",
   "bin": {
-    "ralph": "./bin/ralph"
+    "ralph": "./bin/ralph.ts"
   },
   "scripts": {
     "dev": "bun run src/index.ts",
