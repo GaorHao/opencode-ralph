@@ -11,7 +11,7 @@ AI agent loop for autonomous task execution. Reads a plan, picks one task, compl
 git clone https://github.com/ghuntley/opencode-ralph.git
 cd opencode-ralph
 bun install
-bun add -g $PWD  # makes 'ralph' available globally
+bun run build  # compiles and installs to ~/.bun/bin/ralph
 
 # Run in any project directory
 ralph
