@@ -134,6 +134,9 @@ await $`cp ./bin/ralph ./dist/${mainPkgDirName}/bin/ralph`;
 // Copy postinstall script
 await $`cp ./scripts/postinstall.mjs ./dist/${mainPkgDirName}/postinstall.mjs`;
 
+// Copy README
+await $`cp ./README.md ./dist/${mainPkgDirName}/README.md`;
+
 // Generate main package.json with optionalDependencies
 const mainPackageJson = {
   name: PACKAGE_NAME,
